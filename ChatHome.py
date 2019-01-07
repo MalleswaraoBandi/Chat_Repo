@@ -1,6 +1,5 @@
 import requests
-import urllib
-
+loggedInUser = ""
 
 def openChatRoom():
 	option = "Enter"
@@ -14,24 +13,26 @@ def openChatRoom():
 		if option == 'login':
 			login(userName)
 		if option == 'connect':
-			connectToOthers(userName)
+			print(loggedInUser)
+			connectToOthers(loggedInUser, userName)
 	
 def login(userName):
-	# response = urllib.urlopen("http://192.241.244.177/Malli/Login.php?userName="+userName)
-	response = requests.get("http://192.241.244.177/Malli/Login.php?userName="+userName)
-	# data = response.read()
-	print(response)
-	print("Login as "+userName)
+	response = requests.get("http://192.241.244.177/1PyChatApk/DisplayMessageFromDatabase.php?userName=" + userName)
+	print(response.text)
+	global loggedInUser
+	loggedInUser = userName
 
 def register(userName):
-	# response = urllib.urlopen("http://192.241.244.177/Malli/Register.php?userName="+userName)
-	response = requests.get("http://192.241.244.177/Malli/Register.php?userName="+userName)
-	# data = response.read()
-	print(response)
-	# http://192.241.244.177/Malli/Register.php?userName=Malli
-	print("Registered as "+userName)
-def connectToOthers(userName):
-	print("Connected to "+userName)
+	response = requests.get("http://192.241.244.177/1PyChatApk/Register.php?userName=" + userName)
+	print(response.text)
+	login(userName)
+
+def connectToOthers(sender, reciever):
+	print(sender)
+	print(reciever)
+	message = input("Enter message: ")
+	response = requests.get("http://192.241.244.177/1PyChatApk/SendMessage.php?sender=" + sender + "&reciever=" + reciever + "&message="+message)
+	print(response.text)
 
 if __name__ == '__main__':
 	openChatRoom()
