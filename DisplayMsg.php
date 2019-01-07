@@ -18,8 +18,8 @@ $result = $conn->query($msgQuery);
 
 while($row = $result->fetch_assoc()) 
 {
-    echo "Message: " . $row["Message"]."<br><br>";
-    echo "From: ".$row["Sender"]."<br><br>";
+    echo "Message: " . $row["Message"];
+    echo "From: ".$row["Sender"];
 }
 $msgQuery = "update Messages set Flag = 0 where Receiver = '".$userName."'";
 $result =  $conn->query($msgQuery);
