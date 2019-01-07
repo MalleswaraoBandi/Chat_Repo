@@ -13,7 +13,6 @@ def openChatRoom():
 		if option == 'login':
 			login(userName)
 		if option == 'connect':
-			print(loggedInUser)
 			connectToOthers(loggedInUser, userName)
 	
 def login(userName):
@@ -27,11 +26,9 @@ def register(userName):
 	print(response.text)
 	login(userName)
 
-def connectToOthers(sender, reciever):
-	print(sender)
-	print(reciever)
+def connectToOthers(sender, receiver):
 	message = input("Enter message: ")
-	response = requests.get("http://192.241.244.177/1PyChatApk/SendMessage.php?sender=" + sender + "&reciever=" + reciever + "&message="+message)
+	response = requests.get("http://192.241.244.177/1PyChatApk/SendMessage.php?sender=" + sender + "&receiver=" + receiver + "&message="+message)
 	print(response.text)
 
 if __name__ == '__main__':
