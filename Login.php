@@ -7,13 +7,16 @@ if ($conn->connect_error)
 {
     die("Connection failed: " . $conn->connect_error);
 }
-$sender = $_GET["sender"];
-$receiver = $_GET["receiver"];
-$message = $_GET["message"];
-
-$sqlQuery = "insert into Messages values ('".$sender."','".$receiver."','".$message."', 1)";
-
+$userName = $_GET["userName"];
+$sqlQuery = "select UserName from Users where UserName = '".$userName."'";
 $result = $conn->query($sqlQuery);
-echo "Message sent to ".$receiver; 
+if ($result->num_rows > 0) 
+{
+	echo "Welcome: ".$userName;
+}
+else 
+{
+    echo "Please create an Account to chat!";
+}
 $conn->close();
 ?> 

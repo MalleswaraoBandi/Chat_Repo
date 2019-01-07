@@ -16,10 +16,11 @@ def openChatRoom():
 			connectToOthers(loggedInUser, userName)
 	
 def login(userName):
-	response = requests.get("http://192.241.244.177/1PyChatApk/DisplayMessageFromDatabase.php?userName=" + userName)
+	response = requests.get("http://192.241.244.177/1PyChatApk/Login.php?userName=" + userName)
 	print(response.text)
 	global loggedInUser
 	loggedInUser = userName
+	displayMessage(userName)
 
 def register(userName):
 	response = requests.get("http://192.241.244.177/1PyChatApk/Register.php?userName=" + userName)
@@ -29,6 +30,11 @@ def register(userName):
 def connectToOthers(sender, receiver):
 	message = input("Enter message: ")
 	response = requests.get("http://192.241.244.177/1PyChatApk/SendMessage.php?sender=" + sender + "&receiver=" + receiver + "&message="+message)
+	print(response.text)
+	displayMessage()
+	
+def displayMessage(userName):
+	response = requests.get("http://192.241.244.177/1PyChatApk/DisplayMsg.php?userName=" + userName)
 	print(response.text)
 
 if __name__ == '__main__':
