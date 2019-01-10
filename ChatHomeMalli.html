@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<title>Chat Home</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src = "http://code.jquery.com/jquery-1.9.1.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+	    <script>
+	    	$(document).ready(function(){
+	    		$("#btnLogin").click(function(){
+	    			var user = $("#username").val();
+	    			var URL = "DisplayMessageFromDatabase.php";
+	    			$.ajax({
+	    				url: URL,
+	    				data: {userName : user},
+	    				type: "GET",
+	    				success: function(result){
+	    					$("#messages").html(result);
+	    					$("#loggedInUser").val(user);
+	    					$("#username").val("");
+	    				}
+	    			});
+	    		});
+
+	    		$("#btnRegister").click(function(){
+	    			var user = $("#username").val();
+	    			var URL = "Register.php";
+	    			$.ajax({
+	    				url: URL,
+	    				data: {userName: user},
+	    				success: function(result){
+	    					$("#result").html(result);
+	    				}
+	    			});
+	    		});
+
+	    		$("#btnSend").click(function(){
+	    			var message = $("#message").val();
+	    			var receiver = $("#receiver").val();
+	    			var sender = $("#loggedInUser").val();
+	    			var URL = "SendMessage.php";
+	    			$.ajax({
+	    				url: URL,
+	    				data: {sender: sender, receiver: receiver, message: message},
+	    				success: function(response){
+	    					$("#sendingResponse").html(response);
+	    					$("#message").val("");
+	    					$("#receiver").val("");
+	    				}
+	    			});
+	    		});
+	    	});
+	    </script>
+	    <style>
+	    	.loginForm{
+	    		width: 20%;
+	    		height: 30%;
+	    		align-items: center;
+	    		margin-left: 10%;
+	    		background: #7180ad;
+	    	}
+	    	.outputPanel{
+	    		width: 40%;
+	    		height: 80%;
+	    		background: #ec917c;
+	    		float: right;
+	    		margin-right: 10%;
+	    		margin-top: -18%;
+	    	}
+
+	    	.sendPanel{
+	    		width: 20%;
+	    		height: 30%;
+	    		margin-left: 10%;
+	    		background: #7fb9d0;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<br><br>
+		<div>
+			<div class="panel panel-default text-center loginForm">
+				<br>
+				<div class="col-sm-12">
+					<input type="text" class="form-control" name="username" id="username" placeholder="Enter username.">
+				</div>
+				<br><br><br>
+				<div class="col-sm-12">
+			        <button class="btn btn-default" id="btnLogin" style="color: blue;width: 100px;">Login</button>
+				</div>
+				<br><br><br>
+				<div class="col-sm-12">
+			        <button class="btn btn-default" id="btnRegister" style="color: green; width: 120px;">Register</button>
+				</div>
+			</div>
+			<br><br>
+			<div id="result"></div>
+			<input type="hidden" name="loggedInUser" id="loggedInUser">
+
+			<div class="panel panel-default outputPanel" >
+				<h3 align="center">Messages</h3>
+				<div id="messages"></div>
+			</div>
+		</div>
+		<div class="panel panel-default text-center sendPanel">
+			<br>
+			<div class="col-sm-12">
+				<input type="text" class="form-control" name="message" id="message" placeholder="Message...">
+			</div>
+			<br><br><br>
+			<div class="col-sm-12">
+				<input type="text" class="form-control" name="receiver" id="receiver" placeholder="To:">
+			</div>
+			<br><br><br>
+			<div class="col-sm-12">
+		        <button class="btn btn-default" id="btnSend" style="color: green; width: 120px;">Send</button>
+			</div>
+		</div>
+		<div id="sendingResponse"></div>
+	</body>
+</html>

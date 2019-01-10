@@ -34,7 +34,7 @@ def connectToOthers(sender, receiver):
 	displayMessage(sender)
 
 def displayMessage(userName):
-	response = requests.get("http://192.241.244.177/1PyChatApk/DisplayMsg.php?userName=" + userName)
+	response = requests.get("http://192.241.244.177/1PyChatApk/DisplayMessageFromDatabase.php?userName=" + userName)
 	print(response.text)
 
 if __name__ == '__main__':
