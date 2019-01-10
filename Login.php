@@ -1,7 +1,7 @@
  <?php
 $servername = "192.241.244.177";
 $username = "root";
-$password = "tecnics";
+$password = "*******";
 $conn = new mysqli($servername, $username, $password, "db_BP_Dmart", 3306);
 if ($conn->connect_error) 
 {
