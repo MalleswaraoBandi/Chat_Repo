@@ -14,14 +14,14 @@ class MyPrompt(Cmd):
         print('exit the application. Shorthand: x q Ctrl-D.')
  
     def do_login(self, username):
-        response = requests.get("http://192.241.244.177/1PyChatApk/Login.php?userName=" + username)
+        response = requests.get("http://192.241.244.177/1PyChatApk/Login.php?username=" + username)
         print(response.text)
         global loggedInUser
         loggedInUser = username
         self.displayMessage(username)
 
     def do_register(self, username):
-        response = requests.get("http://192.241.244.177/1PyChatApk/Register.php?userName=" + username)
+        response = requests.get("http://192.241.244.177/1PyChatApk/Register.php?username=" + username)
         print(response.text)
         login(username)
 
@@ -32,7 +32,7 @@ class MyPrompt(Cmd):
         self.displayMessage(loggedInUser)
  
     def displayMessage(selt, username):
-        response = requests.get("http://192.241.244.177/1PyChatApk/DisplayMessageFromDatabase.php?userName=" + username)
+        response = requests.get("http://192.241.244.177/1PyChatApk/DisplayMessageFromDatabase.php?username=" + username)
         print(response.text)
 
     def default(self, inp):

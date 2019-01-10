@@ -10,26 +10,26 @@
 	    <script>
 	    	$(document).ready(function(){
 	    		$("#btnLogin").click(function(){
-	    			var user = $("#username").val();
+	    			var username = $("#username").val();
 	    			var URL = "DisplayMessageFromDatabase.php";
 	    			$.ajax({
 	    				url: URL,
-	    				data: {userName : user},
+	    				data: {username : username},
 	    				type: "GET",
 	    				success: function(result){
 	    					$("#messages").html(result);
-	    					$("#loggedInUser").val(user);
+	    					$("#loggedInUser").val(username);
 	    					$("#username").val("");
 	    				}
 	    			});
 	    		});
 
 	    		$("#btnRegister").click(function(){
-	    			var user = $("#username").val();
+	    			var username = $("#username").val();
 	    			var URL = "Register.php";
 	    			$.ajax({
 	    				url: URL,
-	    				data: {userName: user},
+	    				data: {username: username},
 	    				success: function(result){
 	    					$("#result").html(result);
 	    				}

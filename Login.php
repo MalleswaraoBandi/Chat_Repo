@@ -2,21 +2,22 @@
 $servername = "192.241.244.177";
 $username = "root";
 $password = "tecnics";
-$conn = new mysqli($servername, $username, $password, "db_BP_Dmart", 3306);
-if ($conn->connect_error) 
+
+$connection = new mysqli($servername, $username, $password, "db_BP_Dmart", 3306);
+if ($connection->connect_error) 
 {
-    die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $connection->connect_error);
 }
-$userName = $_GET["userName"];
-$sqlQuery = "select UserName from Users where UserName = '".$userName."'";
-$result = $conn->query($sqlQuery);
+$user = $_GET["username"];
+$sqlQuery = "select UserName from Users where UserName = '".$user."'";
+$result = $connection->query($sqlQuery);
 if ($result->num_rows > 0) 
 {
-	echo "Welcome: ".$userName;
+	echo "Welcome: ".$user;
 }
 else 
 {
     echo "Please create an Account to chat!";
 }
-$conn->close();
+$connection->close();
 ?> 

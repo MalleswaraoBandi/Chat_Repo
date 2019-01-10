@@ -4,25 +4,25 @@ $username = "root";
 $password = "tecnics";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, "db_BP_Dmart", 3306);
+$connection = new mysqli($servername, $username, $password, "db_BP_Dmart", 3306);
 
 // Check connection
-if ($conn->connect_error) 
+if ($connection->connect_error) 
 {
-    die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $connection->connect_error);
 }
-$userName = $_GET["userName"];
+$user = $_GET["username"];
 
-$msgQuery = "select Message, Sender from Messages where Receiver = '".$userName."' and Flag = 1";
-$result = $conn->query($msgQuery);
+$msgQuery = "select Message, Sender from Messages where Receiver = '".$user."' and Flag = 1";
+$result = $connection->query($msgQuery);
 
 while($row = $result->fetch_assoc()) 
 {
     echo "Message: " . $row["Message"];
     echo "From: ".$row["Sender"];
 }
-$msgQuery = "update Messages set Flag = 0 where Receiver = '".$userName."'";
-$result =  $conn->query($msgQuery);
+$msgQuery = "update Messages set Flag = 0 where Receiver = '".$user."'";
+$result =  $connection->query($msgQuery);
 
-$conn->close();
+$connection->close();
 ?> 
